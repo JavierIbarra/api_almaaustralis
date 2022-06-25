@@ -1,0 +1,27 @@
+name: Python Test and Docker
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  
+jobs:     
+  run-tests-django:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source code
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.9.10'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      - name: Test
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        run: |
+          cd Web
+          python manage.py test
