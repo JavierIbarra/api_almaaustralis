@@ -23,5 +23,5 @@ jobs:
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: |
-          cd Web
+          cd almaaustralis
           python manage.py test
